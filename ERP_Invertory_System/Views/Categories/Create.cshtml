@@ -1,0 +1,59 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="d-flex justify-content-center">
+    <div class="col-9">
+        <div class="card shadow">
+            <div class="card-body">
+                <h3 class="card-title text-center text-dark">Category Create</h3>
+                <hr />
+
+                <form class="offset-2" method="post" asp-controller="Categories" asp-action="Create">
+
+                    <div class="form-group row mb-2">
+                        <label asp-for="ProductType" class="col-form-label col-2"></label>
+                        <div class="col-4">
+                            <select class="form-select" asp-for="Product_Type_Id" asp-items="@(new SelectList(ViewBag.ProductTypes, "Id","ProductTypeName"))">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-4"><span asp-validation-for="Product_Type_Id" class="text-danger"></span></div>
+                    </div>
+
+                    <div class="form-group row mb-2">
+                        <label asp-for="CategoryName" class="col-form-label col-2"></label>
+                        <div class="col-4">
+                            <input type="text" asp-for="CategoryName" class="form-control" />
+                        </div>
+                        <div class="col-4"><span asp-validation-for="CategoryName" class="text-danger"></span></div>
+                    </div>
+
+                    <div class="form-group row mb-2">
+                        <label asp-for="Description" class="col-form-label col-2"></label>
+                        <div class="col-4">
+                            <textarea type="text" asp-for="Description" class="form-control"></textarea>
+                        </div>
+                        <div class="col-4"><span asp-validation-for="Description" class="text-danger"></span></div>
+                    </div>
+
+                    <div class="col-4 offset-2">
+                        <button type="submit" class="btn btn-outline-success">Save</button>
+                        <button type="reset" class="btn btn-outline-dark">Reset</button>
+                    </div>
+                </form>
+
+                <a asp-controller="Categories" asp-action="Index">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/libs/jquery/jquery.js"></script>
+    <script src="~/libs/jquery/validate/jquery.validate.js"></script>
+    <script src="~/libs/jquery/unobtrusive/jquery.validate.unobtrusive.js"></script>
+}
+

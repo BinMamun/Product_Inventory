@@ -1,0 +1,97 @@
+﻿@model IEnumerable<ProductType>
+@{
+    ViewData["Title"] = "Index";
+    var i = 0;
+}
+
+<div class="card shadow">
+    <div class="card-body">
+        <h3 class="card-title text-center text-dark">Product Type Information</h3>
+        <hr/>
+        <div class="row">
+            <div class="col-4">
+                <form class="d-flex ">
+                    <input class="form-control me-2 shadow-sm" value="@ViewBag.Search" name="search" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success shadow-sm" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-6 d-flex justify-content-end ">
+                <a class="btn btn-outline-success shadow-sm" asp-controller="ProductTypes" asp-action="Create"><i class="bi bi-plus-lg"></i>Add new</a>   
+
+                <form id="deleteForm" asp-controller="ProductTypes" asp-action="DeleteSelected">
+                    <button type="button" id="deleteSelected"  class="btn btn-outline-danger shadow-sm ms-2">Delete Selected Items</button>
+                </form>
+
+            </div>
+         
+                
+            
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered table-hover shadow-sm">
+                    <thead class="table-success">
+                        <tr>
+                            <th>#</th>                        
+                            <th>@Html.DisplayNameFor(x => x.ProductTypeName)</th>
+                            <th>@Html.DisplayNameFor(x => x.Description)</th>
+                            <th>Actions</th>
+                            <th>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="SelectAll">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var p in Model)
+                            {
+                                <tr>
+                                    <td>@(++i)</td>
+                                    <td>@p.ProductTypeName</td>
+                                    <td style="width:600px">@p.Description</td>
+                                    <td>
+                                        <a title="Edit" class="btn btn-sm btn-outline-dark" asp-controller="Categories" asp-action="Edit" asp-route-id="@p.Id" asp-route-_Key="@p._Key"><i class="bi bi-pencil"></i></a>
+                                        <a title="delete" class="btn btn-sm btn-outline-danger" asp-controller="Categories" asp-action="Delete" asp-route-Id="@p.Id"><i class="bi bi-trash"></i></a>
+                                    </td>
+                                    <td> <div class="form-check">
+                                    <input class="form-check-input chkbox" type="checkbox" data-pk="@p.Id">
+                                </div></td>
+                                </tr>
+                            }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles{ 
+    <link href="~/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+}
+
+@section scripts{ 
+    <script src="~/libs/jquery/jquery.js"></script>
+
+    <script>
+        $(() => {
+            $("#SelectAll").click(function () {
+                $('input:checkbox').prop('checked', this.checked);
+            });
+            $("#deleteSelected").click(() => {
+                if ($(".chkbox:checked").length == 0) return;
+
+                $(".chkbox").each((id, el) => {
+                    if ($(el).is(":checked")) {
+                        var id = $(el).data('pk');
+                        $("#deleteForm").append(`<input type='hidden' name='ids' value=${id} />`);
+                    }
+                });
+                $("#deleteForm").submit();
+            });
+        });
+    </script>
+
+}

@@ -1,0 +1,48 @@
+﻿@model ProductType
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="d-flex justify-content-center">
+    <div class="col-9">
+        <div class="card shadow">
+            <div class="card-body">
+                <h3 class="card-title text-center text-dark">Product Type Create</h3>
+                <hr />
+
+                <form class="offset-2" method="post" asp-controller="ProductTypes" asp-action="Edit" asp-rout-id="@Model.Id" asp-route-_Key="@Model._Key">
+                   
+                    <div class="form-group row mb-2">
+                        <label asp-for="ProductTypeName" class="col-form-label col-2"></label>
+                        <div class="col-4">
+                            <input type="text" asp-for="ProductTypeName" class="form-control" />
+                        </div>
+                        <div class="col-4"><span asp-validation-for="ProductTypeName" class="text-danger"></span></div>
+                    </div>
+
+                    <div class="form-group row mb-2">
+                        <label asp-for="Description" class="col-form-label col-2"></label>
+                        <div class="col-4">
+                            <textarea type="text" asp-for="Description" class="form-control"></textarea>
+                        </div>
+                        <div class="col-4"><span asp-validation-for="Description" class="text-danger"></span></div>
+                    </div>
+
+                    <div class="col-4 offset-2">
+                        <button type="submit" class="btn btn-outline-success">Update</button>
+                        <button type="reset" class="btn btn-outline-dark">Reset</button>
+                    </div>
+                </form>
+
+                <a asp-controller="ProductTypes" asp-action="Index">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/libs/jquery/jquery.js"></script>
+    <script src="~/libs/jquery/validate/jquery.validate.js"></script>
+    <script src="~/libs/jquery/unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

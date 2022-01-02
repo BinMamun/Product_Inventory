@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Product_Inventory_System</title>
+    <link href="~/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/libs/bootstrap/js/bootstrap.bundle.js"></script>
+
+    <style>
+        body {
+            padding-top: 70px;
+            background-color: #f8f8ff;
+        }
+    </style>
+    @await RenderSectionAsync("styles", false)
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-success navbar-expand-md fixed-top border-bottom ">
+        <div class="container-fluid">
+            <span class="navbar-brand">Inventory</span>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="ProductTypes" asp-action="Index">Types</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Categories" asp-action="Index">Categories</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Products" asp-action="Index">Products</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid" style="min-height:calc(100vh - 140px)">
+        @RenderBody()
+    </div>
+
+    <hr/>
+    <footer class="container-fluid">
+        &copy; @DateTime.Now.Year - Expense Tracker Application
+    </footer>
+    @await RenderSectionAsync("scripts", false)
+</body>
+</html>
